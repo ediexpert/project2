@@ -1,0 +1,29 @@
+Database tables used: online_users(session_id,ip,time), clickme(session_id,ip), clicked(ip,timestamp)
+
+Find total online users, lets say 19
+now get a random number, rand(1,19), lets say it gives 7
+Now query : SELECT * FROM online_users LIMIT 6,1 
+$sess = $result['session]
+$ip = $result['ip']
+
+DELETE all values which is older than 48 hours
+2016-01-26 
+
+
+
+DELETE FROM clicked WHERE time is more than 48 hour manually from admin panel
+Now add this data to clickme table
+INSERT INTO clickme (session,ip) VALUES ('$sess','$ip')
+
+
+
+Now on Usersite we will check for this database after every 10 sec by query
+
+$session_id = session_id();
+$qry = mysql_query("SELECT * FROM clickme WHERE session = '$session_id'");
+if(mysql_num_rows($qry) == 1) then we will show the ad and ad div will move under user mouse
+
+once clicked on ad, a cookie will be set to user browser and ad will hide. and not shon untill cookie is there even if the clickme has its session id.
+
+
+
